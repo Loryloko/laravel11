@@ -1,0 +1,75 @@
+main {
+    min-height: 1000px;
+}
+
+body {
+    background-color: antiquewhite;
+}
+
+.overflow-x-auto::-webkit-scrollbar,
+[id^="carousel-"]::-webkit-scrollbar {
+    display: none;
+}
+
+.overflow-x-auto,
+[id^="carousel-"] {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+[id^="carousel-"] {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+}
+
+.product-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.15) !important;
+}
+
+.object-cover {
+    object-fit: cover;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0,0,0,.125);
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #f8f9fa;
+    color: #dc3545;
+}
+
+
+summary::-webkit-details-marker {
+    display: none;
+}
+summary {
+    list-style: none;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+
+details[open] .freccia-stato {
+    transform: rotate(180deg);
+    color: #dc3545 !important;
+}
+.freccia-stato {
+    transition: transform 0.2s ease;
+}
+
+[id^="carousel-"] {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+}
+.object-cover {
+    object-fit: cover;
+}
