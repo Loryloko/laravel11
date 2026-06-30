@@ -12,6 +12,7 @@
     <div class="row justify-content-center">
       <div class="col-12 col-md-8">
         <div class="card border-0 shadow p-0 bg-white" style="border-radius: 16px; overflow: hidden;">
+          
           <div class="position-relative" style="height: 350px;">
             @if($product->image)
               <img src="{{ Storage::url($product->image) }}" 
@@ -19,7 +20,7 @@
                    alt="{{ $product->name }}"
                    style="object-fit: cover;">
             @else
-              <img src="https://picsum.photos/800/500" 
+              <img src="https://picsum.photos" 
                    class="w-100 h-100" 
                    alt="Immagine di default"
                    style="object-fit: cover;">
@@ -29,7 +30,6 @@
               {{ number_format($product->price, 2) }} €
             </span>
           </div>
-
           <div class="card-body p-4 p-md-5 text-start">
             
             <span class="badge bg-secondary text-uppercase mb-2 px-3 py-2" style="font-size: 0.75rem; letter-spacing: 0.05em; border-radius: 6px;">
@@ -55,11 +55,31 @@
                 @empty
                   <div class="alert alert-success d-flex align-items-center w-100 mb-0 py-2 px-3 border-0 rounded" style="font-size: 0.95rem;">
                     <i class="bi bi-check-circle-fill me-2 fs-5"></i> 
-                    <span>Nessun allergene o rischio di contaminazione rilevato per questo piatto.</span>
+                    <span>Nessun allergene rilevato per questo piatto.</span>
                   </div>
                 @endforelse
               </div>
             </div>
+
+            @auth
+              @if(Auth::id() === $product->user_id)
+                <div class="pt-4 mt-4 border-top border-light d-flex gap-2">
+                  
+                  <a href="{{ route('products.edit', $product) }}" class="btn btn-warning fw-bold px-4 py-2 rounded shadow-sm d-inline-flex align-items-center gap-2">
+                    <i class="bi bi-pencil-square"></i> Modifica questo articolo
+                  </a>
+
+                  <form action="{{ route('products.destroy', $product) }}" method="POST" onsubmit="return confirm('Sei davvero sicuro di voler eliminare questo articolo dal menu in modo permanente?');" class="m-0">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger fw-bold px-4 py-2 rounded shadow-sm d-inline-flex align-items-center gap-2">
+                      <i class="bi bi-trash-fill"></i> Elimina dal Menu
+                    </button>
+                  </form>
+
+                </div>
+              @endif
+            @endauth
 
           </div>
         </div>

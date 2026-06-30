@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Category;
 
@@ -25,7 +26,8 @@ class PublicController extends Controller {
 
     public function profile()
     {
-        return view('profile'); 
+        $myProducts = Product::where('user_id', Auth::id())->latest()->get();
+        return view('profile', compact('myProducts'));
     }
 }
 

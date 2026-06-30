@@ -8,7 +8,7 @@
       <ul class="dropdown-menu">
         <li><a href="{{route('home')}}" class="dropdown-item">Home</a></li>
         <li><a href="{{route('menu')}}" class="dropdown-item">Menu</a></li>
-        <li><a href="{{route('contacts')}}" class="dropdown-item">Contacts</a></li>
+        <li><a href="{{route('contacts')}}" class="dropdown-item">Contatti</a></li>
       </ul>
     </div>
 
@@ -24,7 +24,12 @@
       <ul class="dropdown-menu dropdown-menu-end"> 
         @auth
           <li><h6 class="dropdown-header">Ciao, {{Auth::user()->name}}</h6></li>
-          <li><a href="{{route('user.profile')}}" class="dropdown-item">Profilo personale</a></li>
+          <li><a href="{{route('user.profile')}}" class="dropdown-item">Profilo personale</a></li>       <li class="nav-item">
+            <a class="dropdown-item" href="{{ route('products.create') }}">Nuova prodotto</a>
+          </li>
+          <li class="nav-item">
+            <a class="dropdown-item" href="{{ route('allergens.create') }}"> Aggiungi allergene</a>
+          </li>
           <li><hr class="dropdown-divider"></li>
           <li>
             <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('form-logout').submit();" class="dropdown-item text-danger">Logout</a>

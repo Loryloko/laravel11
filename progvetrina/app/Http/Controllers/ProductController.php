@@ -83,8 +83,7 @@ class ProductController extends Controller
 
         $product->allergens()->sync($request->input('allergens', []));
 
-        return redirect()->route('user.profile')->with('successMessage', 'Articolo aggiornata con successo!');
-    }
+return redirect()->route('menu')->with('successMessage', 'Articolo modificato con successo!');    }
 
     public function destroy(Product $product)
     {
@@ -96,6 +95,6 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('user.profile')->with('successMessage', 'Articolo eliminato correttamente dal menu!');
+            return redirect()->route('menu')->with('successMessage', 'Articolo eliminato correttamente dal menu!');
     }
 }
