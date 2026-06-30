@@ -1,1 +1,1 @@
-Professore, ho provato a aggiustarlo, adesso è possibile inserire i prodotti e i tag dalla nav dopo aver effettuato il login dallo stesso menu, andando sullo show dei prodotti gli utenti possono modificare/eliminare gli articoli inseriti da loro; mi faccia sapere se manca qualcosa
+Professore, ho provato ad aggiustarlo, adesso è possibile inserire i prodotti e i tag dalla nav dopo aver effettuato il login dallo stesso menu, andando sullo show dei prodotti gli utenti possono modificare/eliminare gli articoli inseriti da loro; mi faccia sapere se manca qualcosa
