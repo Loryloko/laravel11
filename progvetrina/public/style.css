@@ -73,3 +73,15 @@ details[open] .freccia-stato {
 .object-cover {
     object-fit: cover;
 }
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.accordion-collapse:not(.show) {
+    display: none !important;
+}

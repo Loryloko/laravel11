@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Allergen;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -32,7 +33,7 @@ class ProductController extends Controller
             'name' => $data['name'],
             'price' => $data['price'],
             'description' => $data['description'] ?? null,
-            'user_id' => Auth::id() ?? 1, 
+            'user_id' => Auth::id(), 
             'category_id' => $data['category_id'],
             'image' => $imagePath
         ]);
@@ -50,7 +51,7 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        abort_if(Auth::id() !== $product->user_id, 403, 'Azione non autorizzata.');
+        Gate::authorize('manage-product', $product);
 
         $allergens = Allergen::orderBy('name', 'asc')->get();
         $categories = Category::orderBy('name', 'asc')->get();
@@ -60,7 +61,7 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, Product $product)
     {
-        abort_if(Auth::id() !== $product->user_id, 403, 'Azione non autorizzata.');
+        Gate::authorize('manage-product', $product);
 
         $data = $request->validated();
 
@@ -87,8 +88,7 @@ return redirect()->route('menu')->with('successMessage', 'Articolo modificato co
 
     public function destroy(Product $product)
     {
-        abort_if(Auth::id() !== $product->user_id, 403, 'Azione non autorizzata.');
-
+        Gate::authorize('manage-product', $product);
         if ($product->image) {
             Storage::disk('public')->delete($product->image);
         }

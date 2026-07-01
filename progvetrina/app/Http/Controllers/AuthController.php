@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Routing\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -22,10 +21,10 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate(); 
 
-            return redirect()->intended(route('user.profile'))->with('successMessage', 'Bentornato, hai effettuato il login con successp');
+            return redirect()->intended(route('user.profile'))->with('successMessage', 'Bentornato, hai effettuato il login con successo');
         }
 
         return back()->withErrors([
