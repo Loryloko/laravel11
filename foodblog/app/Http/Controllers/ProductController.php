@@ -11,12 +11,53 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     public function create()
-    {
-        $allergens = Allergen::orderBy('name', 'asc')->get();
-        $categories = Category::orderBy('name', 'asc')->get();
+{
+    $categories = Category::orderBy('name', 'asc')->get();
+    $allergens = Allergen::orderBy('name', 'asc')->get();
 
-        return view('products.create', compact('allergens', 'categories'));
+    if ($categories->isEmpty()) {
+        $defaultCategories = [
+            ['name' => 'Antipasto'],
+            ['name' => 'Pizza Rossa'],
+            ['name' => 'Pizza Bianca'],
+            ['name' => 'Dolce'],
+            ['name' => 'Bibita']
+        ];
+
+        foreach ($defaultCategories as $category) {
+            Category::firstOrCreate($category);
+        }
+        
+        $categories = Category::orderBy('name', 'asc')->get();
     }
+
+    if ($allergens->isEmpty()) {
+        $defaultAllergens = [
+            ['name' => 'Glutine'],
+            ['name' => 'Lattosio / Latte'],
+            ['name' => 'Frutta a guscio'],
+            ['name' => 'Arachidi'],
+            ['name' => 'Uova'],
+            ['name' => 'Pesce (es. Acciughe)'],
+            ['name' => 'Molluschi (es. Frutti di mare)'],
+            ['name' => 'Sedano'],
+            ['name' => 'Senape'],
+            ['name' => 'Semi di sesamo'],
+            ['name' => 'Anidride solforosa e solfiti'],
+            ['name' => 'Lupini'],
+            ['name' => 'Crostacei'],
+            ['name' => 'Soia']
+        ];
+
+        foreach ($defaultAllergens as $allergen) {
+            Allergen::firstOrCreate($allergen);
+        }
+
+        $allergens = Allergen::orderBy('name', 'asc')->get();
+    }
+
+    return view('products.create', compact('allergens', 'categories'));
+}
 
     public function store(ProductRequest $request)
     {   

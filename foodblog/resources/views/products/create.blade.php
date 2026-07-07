@@ -30,7 +30,7 @@
             <div class="mb-3">
               <label for="name" class="form-label fw-bold">Nome del piatto o ricetta</label>
               <!-- MODIFICATO: Placeholder più generici (es. Lasagna, Carbonara...) rispetto a Margherita/Diavola -->
-              <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Es. Lasagna alla Bolognese, Carbonara..." >
+              <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Es. Pizza Margherita, Diavola, Patatine..." >
               @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
             </div>
 
@@ -42,7 +42,7 @@
 
             <div class="mb-3">
               <label for="description" class="form-label fw-bold">Descrizione / Ingredienti base</label>
-              <textarea name="description" id="description" rows="3" class="form-control @error('description') is-invalid @enderror" placeholder="Es. Uova, guanciale, pecorino romano, pepe..."></textarea>
+              <textarea name="description" id="description" rows="3" class="form-control @error('description') is-invalid @enderror" placeholder="Es. Uova, guanciale, pecorino romano, pepe...">{{ old('description') }}</textarea>
               @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror
             </div>
 
@@ -50,7 +50,7 @@
               <label for="category_id" class="form-label fw-bold">Categoria</label>
               <select name="category_id" id="category_id" class="form-select @error('category_id') is-invalid @enderror" >
                   <option value="" selected disabled>Scegli una categoria...</option>
-                  @foreach($categories ?? [] as $category)
+                  @foreach($categories as $category)
                     <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
                         {{ $category->name }}
                     </option>
